@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- CSP Estrito de Alta Segurança: Apenas recursos locais ('self') e Google Fonts são autorizados -->
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self'; 
+        script-src 'self'; 
+        style-src 'self' https://fonts.googleapis.com; 
+        font-src 'self' https://fonts.gstatic.com; 
+        object-src 'none'; 
+        base-uri 'self'; 
+        form-action 'self'; 
+        frame-ancestors 'none';
+    ">
+
+    <title>Estilizador & Formatador de Código Seguro</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@400;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Estilos Locais -->
+    <link rel="stylesheet" href="assets/css/vendor/prism-tomorrow.min.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>Formatador Estático de Código</h1>
+        <p>Embeleze e formate seu código localmente de forma segura. Seus dados não são enviados para servidores
+            externos.</p>
+    </header>
+
+    <main class="main-container">
+        <div class="error-toast" id="errorBox" aria-live="polite"></div>
+
+        <div class="controls">
+            <div class="control-group">
+                <label for="langSelect">Linguagem</label>
+                <select id="langSelect">
+                    <option value="javascript">JavaScript (ES6+)</option>
+                    <option value="html">HTML</option>
+                    <option value="css">CSS</option>
+                    <option value="json">JSON</option>
+                    <option value="xml">XML</option>
+                    <option value="java">Java (Highlight)</option>
+                    <option value="csharp">C# / .NET (Highlight)</option>
+                    <option value="bash">Shell Script / Bash (Highlight)</option>
+                    <option value="powershell">PowerShell (Highlight)</option>
+                    <option value="python">Python (Highlight)</option>
+                </select>
+            </div>
+
+            <div class="button-group">
+                <button id="formatBtn" type="button" class="btn btn-primary">Formatar & Estilizar</button>
+                <button id="clearBtn" type="button" class="btn btn-secondary">Limpar</button>
+            </div>
+        </div>
+
+        </div>
+
+        <div class="workspace">
+            <div class="panel">
+                <div class="panel-header"><span>Entrada de Código Bruto</span></div>
+                <textarea id="codeInput" placeholder="Cole seu código aqui..." spellcheck="false"></textarea>
+            </div>
+
+            <div class="panel">
+                <div class="panel-header"><span>Saída Estruturada</span></div>
+                <div class="output-container">
+                    <pre><code class="language-javascript" id="codeOutput">// O código estruturado aparecerá aqui...</code></pre>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Prettier Standalone + Parsers Core -->
+    <script src="assets/js/vendor/prettier-standalone.js" defer></script>
+    <script src="assets/js/vendor/parser-babel.js" defer></script>
+    <script src="assets/js/vendor/parser-html.js" defer></script>
+    <script src="assets/js/vendor/parser-postcss.js" defer></script>
+    <script src="assets/js/vendor/plugin-xml.js" defer></script>
+
+    <!-- Prism Core + Gramáticas de Linguagens -->
+    <script src="assets/js/vendor/prism-core.min.js" defer></script>
+    <script src="assets/js/vendor/prism-autoloader.min.js" defer></script>
+    <script src="assets/js/vendor/prism-java.min.js" defer></script>
+    <script src="assets/js/vendor/prism-csharp.min.js" defer></script>
+    <script src="assets/js/vendor/prism-bash.min.js" defer></script>
+    <script src="assets/js/vendor/prism-powershell.min.js" defer></script>
+    <script src="assets/js/vendor/prism-xml-doc.min.js" defer></script>
+
+    <!-- App Principal -->
+    <script src="assets/js/app.js" defer></script>
+
+</body>
+
+</html>

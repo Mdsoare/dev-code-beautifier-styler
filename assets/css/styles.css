@@ -1,0 +1,266 @@
+:root {
+    --bg-main: #0b0f19;
+    --bg-card: #151d30;
+    --border-color: #24324f;
+    --accent: #6366f1;
+    --accent-hover: #4f46e5;
+    --text-main: #f3f4f6;
+    --text-muted: #9ca3af;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    padding: 40px 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    max-width: 800px;
+}
+
+header h1 {
+    font-size: 28px;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+header p {
+    color: var(--text-muted);
+    font-size: 15px;
+}
+
+.main-container {
+    width: 100%;
+    max-width: 1100px;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+}
+
+.controls {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    align-items: flex-end;
+    flex-wrap: wrap;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+}
+
+.btn {
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.btn-primary {
+    background-color: var(--accent);
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: var(--accent-hover);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--text-muted);
+    border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--text-main);
+    border-color: var(--text-muted);
+}
+
+.control-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+label {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
+}
+
+select {
+    background-color: var(--bg-main);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    padding: 10px 15px;
+    border-radius: 6px;
+    outline: none;
+    cursor: pointer;
+    min-width: 180px;
+}
+
+button {
+    background-color: var(--accent);
+    color: #fff;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-top: 17px;
+}
+
+button:hover {
+    background-color: var(--accent-hover);
+}
+
+.workspace {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+@media (max-width: 768px) {
+    .workspace {
+        grid-template-columns: 1fr;
+    }
+}
+
+.panel {
+    display: flex;
+    flex-direction: column;
+}
+
+.panel-header {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+textarea {
+    width: 100%;
+    height: 450px;
+    background-color: var(--bg-main);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: #fff;
+    padding: 15px;
+    font-family: 'Fira Code', monospace;
+    font-size: 14px;
+    resize: none;
+    outline: none;
+}
+
+textarea:focus {
+    border-color: var(--accent);
+}
+
+.output-container {
+    position: relative;
+    height: 450px;
+    background-color: #161b22;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: auto;
+}
+
+/* Sobrescrita customizada Prism */
+pre[class*="language-"] {
+    margin: 0 !important;
+    padding: 15px !important;
+    background: transparent !important;
+    height: 100%;
+}
+
+code[class*="language-"] {
+    font-family: 'Fira Code', monospace !important;
+    font-size: 14px !important;
+}
+
+.error-toast {
+    background-color: rgba(239, 68, 68, 0.2);
+    border: 1px solid #ef4444;
+    color: #fca5a5;
+    padding: 10px 15px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    display: none;
+    font-size: 14px;
+}
+
+/* ==========================================================================
+   Ajustes de Responsividade (Mobile First / Breakpoints)
+   ========================================================================== */
+
+/* Prevenção de estouro lateral em blocos de código */
+pre,
+code,
+textarea {
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+/* Telas de Tablets e Celulares (Abaixo de 768px) */
+@media (max-width: 768px) {
+
+    /* Empilha os painéis de Entrada e Saída em uma única coluna */
+    .editor-container,
+    .workspace {
+        flex-direction: column;
+        grid-template-columns: 1fr;
+        /* Caso esteja usando CSS Grid */
+        gap: 15px;
+    }
+
+    /* Controles ocupam a largura total em telas pequenas */
+    .controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .control-group,
+    .button-group {
+        width: 100%;
+    }
+
+    /* Botões ocupam 100% da largura no celular para facilitar o toque */
+    .btn {
+        flex: 1;
+        text-align: center;
+        padding: 12px 15px;
+        /* Área de toque maior para mobile */
+    }
+
+    /* Ajuste de altura das caixas para não ocupar a tela toda na vertical */
+    textarea,
+    pre {
+        min-height: 250px;
+        max-height: 400px;
+    }
+}
