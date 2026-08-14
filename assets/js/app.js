@@ -13,6 +13,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const codeOutput = document.getElementById('codeOutput'); // CORRIGIDO: const adicionado
     const errorBox = document.getElementById('errorBox');
 
+    // Limite de segurança para evitar DoS do navegador
+    const MAX_CODE_LENGTH = 100 * 1024;
+
+    // Whitelist estrita de linguagens permitidas
+    const ALLOWED_LANGUAGES = new Set([
+        'javascript', 'html', 'css', 'json', 'xml',
+        'java', 'csharp', 'bash', 'powershell', 'python'
+    ]);
+
     if (!formatBtn || !clearBtn || !codeInput || !langSelect || !codeOutput || !errorBox) {
         console.error('[SecError] Elementos vitais do DOM não foram encontrados.');
         return;
@@ -27,17 +36,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
         hideError();
 
+        // 1. Validação de presença
         if (!rawCode.trim()) {
             codeOutput.textContent = '// Nenhum código fornecido para processamento.';
             return;
         }
 
+        // 2. Proteção contra DoS (tamanho do arquivo)
+        if (rawCode.length > MAX_CODE_LENGTH) {
+            showError(`Erro de Segurança: O código excede o limite máximo permitido (${MAX_CODE_LENGTH / 1024} KB).`);
+            return;
+        }
+
+        // 3. Validação estrita da linguagem (Sanitização do parâmetro)
+        if (!ALLOWED_LANGUAGES.has(language)) {
+            language = 'javascript'; // Fallback seguro
+        }
+
         let formattedCode = rawCode;
 
-        // Formatação estrutural via Prettier (Linguagens suportadas no browser)
+        // Formatação via Prettier
         if (window.prettier && window.prettierPlugins) {
-
-            // Mapeamento dinâmico de plugins (incluindo plugin de XML se carregado)
             const xmlPlugin = window.prettierPlugins.xml || window.xmlPlugin;
 
             const prettierParsers = {
@@ -59,17 +78,18 @@ document.addEventListener('DOMContentLoaded', () => {
                         tabWidth: 2
                     });
                 } catch (err) {
-                    showError(`Erro de Sintaxe (${language}): ${err.message.split('\n')[0]}`);
+                    const firstLine = err.message.split('\n')[0];
+                    showError(`O código inserido contém erro de sintaxe em ${language}: ${firstLine}`);
                     return;
                 }
             }
         }
 
-        // Sanitização contra DOM XSS: Atribuição estrita via textContent
-        codeOutput.className = `language-${language}`;
+        // Atribuição segura ao DOM (previne DOM XSS)
+        codeOutput.className = `language-${encodeURIComponent(language)}`;
         codeOutput.textContent = formattedCode;
 
-        // Aplica realce sintático (PrismJS)
+        // Realce de sintaxe
         if (window.Prism && window.Prism.highlightElement) {
             window.Prism.highlightElement(codeOutput);
         }
@@ -77,7 +97,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function clearAll() {
         codeInput.value = '';
-        codeOutput.className = `language-${langSelect.value}`;
+        const safeLang = ALLOWED_LANGUAGES.has(langSelect.value) ? langSelect.value : 'javascript';
+        codeOutput.className = `language-${safeLang}`;
         codeOutput.textContent = '// O código estruturado aparecerá aqui...';
         hideError();
         codeInput.focus();

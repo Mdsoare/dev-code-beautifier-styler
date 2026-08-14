@@ -13,9 +13,15 @@
         font-src 'self' https://fonts.gstatic.com; 
         object-src 'none'; 
         base-uri 'self'; 
-        form-action 'self'; 
-        frame-ancestors 'none';
+        form-action 'self';
     ">
+
+    <!-- Anti-Clickjacking Frame Buster (Mitigação para GitHub Pages / Meta CSP) -->
+    <script>
+        if (self !== top) {
+            top.location = self.location;
+        }
+    </script>
 
     <title>Estilizador & Formatador de Código Seguro</title>
 
@@ -91,7 +97,6 @@
 
     <!-- Prism Core + Gramáticas de Linguagens -->
     <script src="assets/js/vendor/prism-core.min.js" defer></script>
-    <script src="assets/js/vendor/prism-autoloader.min.js" defer></script>
     <script src="assets/js/vendor/prism-java.min.js" defer></script>
     <script src="assets/js/vendor/prism-csharp.min.js" defer></script>
     <script src="assets/js/vendor/prism-bash.min.js" defer></script>
