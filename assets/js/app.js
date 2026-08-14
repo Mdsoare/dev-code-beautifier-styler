@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function processCode() {
         const rawCode = codeInput.value;
-        const language = langSelect.value;
+        let language = langSelect.value;
 
         hideError();
 
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 3. Validação estrita da linguagem (Sanitização do parâmetro)
         if (!ALLOWED_LANGUAGES.has(language)) {
-            language = 'javascript'; // Fallback seguro
+            language = 'javascript';
         }
 
         let formattedCode = rawCode;
