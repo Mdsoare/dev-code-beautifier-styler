@@ -71,7 +71,7 @@ A aplicação funciona **100% no navegador (Client-Side)**, garantindo total pri
 ├── assets/
 │   ├── css/
 │   │   ├── styles.css      # Estilização da UI e temas de sintaxe
-│   │   └── vendor/         # Estilização dicional (Prettier & PrismJS)
+│   │   └── vendor/         # Estilização adicional (Prettier & PrismJS)
 │   └── js/
 │       ├── app.js          # Lógica principal e manipulação do DOM
 │       └── vendor/         # Bibliotecas locais (Prettier & PrismJS)
