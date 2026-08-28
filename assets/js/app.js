@@ -60,11 +60,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const xmlPlugin = window.prettierPlugins.xml || window.xmlPlugin;
 
             const prettierParsers = {
-                javascript: { parser: "babel", plugin: window.prettierPlugins.babel },
-                html: { parser: "html", plugin: window.prettierPlugins.html },
-                css: { parser: "css", plugin: window.prettierPlugins.postcss },
-                json: { parser: "json", plugin: window.prettierPlugins.babel },
-                xml: xmlPlugin ? { parser: "xml", plugin: xmlPlugin } : null
+                javascript: { parser: 'babel', plugin: window.prettierPlugins.babel },
+                html: { parser: 'html', plugin: window.prettierPlugins.html },
+                css: { parser: 'css', plugin: window.prettierPlugins.postcss },
+                json: { parser: 'json', plugin: window.prettierPlugins.babel },
+                xml: xmlPlugin ? { parser: 'xml', plugin: xmlPlugin } : null
             };
 
             if (prettierParsers[language] && prettierParsers[language].plugin) {
