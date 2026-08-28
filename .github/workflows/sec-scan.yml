@@ -77,7 +77,7 @@ jobs:
         run: npx stylelint "assets/css/**/*.css" --fix
 
       - name: Análise Estática de Código JavaScript (ESLint)
-        run: npx eslint assets/js/script.js --fix
+        run: npx eslint assets/js/**/*.js --fix
 
   # -------------------------------------------------------------
   # JOB 4: Qualidade de Sintaxe Docs (Markdown)
